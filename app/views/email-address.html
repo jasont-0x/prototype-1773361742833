@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is your email address?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["email-address"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["email-address"], href: "#email-address" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukInput({
+      id: "email-address",
+      name: "email-address",
+      label: {
+        text: "What is your email address?",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "We will use this to contact you about your application" },
+      errorMessage: errors["email-address"] if errors else null,
+      value: data["email-address"]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
