@@ -1,0 +1,5 @@
+{
+  "serviceName": "Apply for a quick service",
+  "serviceUrl": "/start",
+  "useAuth": false
+}
