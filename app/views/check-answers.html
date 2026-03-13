@@ -1,0 +1,68 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "Are you applying for yourself or someone else?" },
+        value: { text: data["applicant-type"] if data["applicant-type"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/applicant-type",
+            text: "Change",
+            visuallyHiddenText: "are you applying for yourself or someone else?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your full name?" },
+        value: { text: data["full-name"] if data["full-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/full-name",
+            text: "Change",
+            visuallyHiddenText: "what is your full name?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your email address?" },
+        value: { text: data["email-address"] if data["email-address"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/email-address",
+            text: "Change",
+            visuallyHiddenText: "what is your email address?"
+          }]
+        }
+      },
+      {
+        key: { text: "Why are you applying for this service?" },
+        value: { text: data["application-reason"] if data["application-reason"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/application-reason",
+            text: "Change",
+            visuallyHiddenText: "why are you applying for this service?"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
